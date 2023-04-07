@@ -3,6 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Document;
+use App\Models\DocumentTag;
+use App\Models\Tag;
+use Database\Factories\DocumentFactory;
+use Database\Factories\TagFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,11 +20,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        DocumentFactory::times(100)->create();
+        TagFactory::times(100)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $documents = Document::paginate(100);
+
+        foreach($documents as $document){
+            $count = rand(1,5);
+
+            for($i = 0; $i < $count; $i++){
+                DocumentTag::create([
+                    'document_id' => $document->id,
+                    'tag_id' => rand(100/$count*$i + 1, 100/$count*($i+1))  ,
+                ]);
+            }
+        }
     }
 }
