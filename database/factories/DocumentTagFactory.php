@@ -21,3 +21,4 @@ class DocumentTagFactory extends Factory
         ];
     }
 }
+//

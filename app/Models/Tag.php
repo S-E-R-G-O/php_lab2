@@ -20,3 +20,4 @@ class Tag extends Model
         return $this->belongsToMany(Tag::class, 'document_tags', 'tag_id', 'document_id');
     }
 }
+//

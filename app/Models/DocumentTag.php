@@ -22,3 +22,4 @@ class DocumentTag extends Model
         return $this->hasMany(Document::class,'id', 'document_id');
     }
 }
+//
